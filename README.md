@@ -9,5 +9,8 @@ Learning Material for AWS Certifications
 
 ## Storage
 
-- [S3](/Storage/s3.md)
+- [S3 - Simple Storage Service](/Storage/s3.md)
 - [EBS - Elastic Block Store](/Storage/ebs.md)
+- [EFS - Elastic File Store](/Storage/efs.md)
+- [EFS x EBS Comparison](/Storage/ebsXefs.md)
+- [AWS Backup](/Storage/backup.md)
