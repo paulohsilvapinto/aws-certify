@@ -20,7 +20,7 @@ grand_parent: AWS Services
 ## Use cases
 
 - DynamoDB is recommended for a variety of scenarios such as Mobile apps, IoT, Gaming, etc,
-- **Anti-patterns** include: data that requires complex transactional data and SQL instructionsmodifying from a relational database to a NoSQL database if the application was prepared to work with a relational DB. 
+- **Anti-patterns** include: using for data that requires complex transactional data and SQL instructions; modifying from a relational database to a NoSQL database if the application was prepared to work with a relational DB. 
 - **Large objects** cannot be stored directly on DynamoDb due to the limitation of file size, but a typical pattern is storing the data in S3 and the metadata in the DynamoDB table.
 - In general: 
   - Large volume of data with multiple reads and write requests: DynamoDB;
