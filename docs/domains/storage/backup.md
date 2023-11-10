@@ -2,8 +2,7 @@
 layout: default
 title: AWS Backup
 parent: Storage
-grand_parent: AWS Domains
-nav_order: 5
+grand_parent: AWS services
 ---
 
 # AWS Backup

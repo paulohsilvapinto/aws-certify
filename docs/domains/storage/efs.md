@@ -2,8 +2,7 @@
 layout: default
 title: EFS - Elastic File System
 parent: Storage
-grand_parent: AWS Domains
-nav_order: 3
+grand_parent: AWS services
 ---
 
 # EFS - Elastic File System

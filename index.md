@@ -12,7 +12,7 @@ permalink: /
 Learning Material for AWS Certifications
 {: .fs-6 .fw-300 }
 
-## AWS Domains
+## AWS services
 
 - [storage](#storage)
 
@@ -20,8 +20,8 @@ Learning Material for AWS Certifications
 
 ### storage
 
-- [S3 - Simple storage Service](/aws-certify/docs/domains/storage/s3.html)
-- [EBS - Elastic Block Store](/aws-certify/docs/domains/storage/ebs.html)
-- [EFS - Elastic File Store](/aws-certify/docs/domains/storage/efs.html)
-- [EFS x EBS Comparison](/aws-certify/docs/domains/storage/ebsXefs.html)
-- [AWS Backup](/aws-certify/docs/domains/storage/backup.html)
+- [S3 - Simple storage Service](/aws-certify/docs/services/storage/s3.html)
+- [EBS - Elastic Block Store](/aws-certify/docs/services/storage/ebs.html)
+- [EFS - Elastic File Store](/aws-certify/docs/services/storage/efs.html)
+- [EFS x EBS Comparison](/aws-certify/docs/services/storage/ebsXefs.html)
+- [AWS Backup](/aws-certify/docs/services/storage/backup.html)

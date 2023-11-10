@@ -1,10 +1,10 @@
 ---
 layout: default
 title: Storage
-parent: AWS Domains
+parent: AWS services
 nav_order: 1
 has_children: true
-permalink: /docs/domains/storage
+permalink: /docs/services/storage
 ---
 
 # Storage
