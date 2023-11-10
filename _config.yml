@@ -40,9 +40,16 @@ search:
 mermaid:
   # Version of mermaid library
   # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
-  version: "9.1.3"
+  version: "9.4.3"
+
+# Google Analytics Tracking (optional)
+# Supports a CSV of tracking ID strings (eg. "UA-1234567-89,G-1AB234CDE5")
+ga_tracking: G-66HSXLJS4Y
 
 callouts:
   warning:
     title: Warning
     color: red
+  important:
+    title: Important!
+    color: yellow
