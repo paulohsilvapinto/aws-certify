@@ -14,14 +14,14 @@ Learning Material for AWS Certifications
 
 ## AWS Domains
 
-- [Storage](#storage)
+- [storage](#storage)
 
 ## Content
 
-### Storage
+### storage
 
-- [S3 - Simple Storage Service](/aws-certify/docs/domains/Storage/s3.html)
-- [EBS - Elastic Block Store](/aws-certify/docs/domains/Storage/ebs.html)
-- [EFS - Elastic File Store](/aws-certify/docs/domains/Storage/efs.html)
-- [EFS x EBS Comparison](/aws-certify/docs/domains/Storage/ebsXefs.html)
-- [AWS Backup](/aws-certify/docs/domains/Storage/backup.html)
+- [S3 - Simple storage Service](/aws-certify/docs/domains/storage/s3.html)
+- [EBS - Elastic Block Store](/aws-certify/docs/domains/storage/ebs.html)
+- [EFS - Elastic File Store](/aws-certify/docs/domains/storage/efs.html)
+- [EFS x EBS Comparison](/aws-certify/docs/domains/storage/ebsXefs.html)
+- [AWS Backup](/aws-certify/docs/domains/storage/backup.html)
