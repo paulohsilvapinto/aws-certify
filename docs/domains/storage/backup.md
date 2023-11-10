@@ -2,7 +2,7 @@
 layout: default
 title: AWS Backup
 parent: Storage
-grand_parent: AWS services
+grand_parent: AWS Services
 ---
 
 # AWS Backup

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Storage
-parent: AWS services
+parent: AWS Services
 nav_order: 1
 has_children: true
 permalink: /docs/services/storage

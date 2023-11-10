@@ -2,7 +2,7 @@
 layout: default
 title: EBS - Elastic Block Store
 parent: Storage
-grand_parent: AWS services
+grand_parent: AWS Services
 ---
 
 # EBS - Elastic Block Store

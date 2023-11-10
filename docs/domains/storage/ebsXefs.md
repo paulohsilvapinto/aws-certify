@@ -2,7 +2,7 @@
 layout: default
 title: EBS x EFS Comparison
 parent: Storage
-grand_parent: AWS services
+grand_parent: AWS Services
 ---
 
 # EBS x EFS Comparison

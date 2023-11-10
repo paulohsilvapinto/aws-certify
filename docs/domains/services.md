@@ -1,14 +1,14 @@
 ---
 layout: default
-title: AWS services
+title: AWS Services
 nav_order: 2
 has_children: true
 permalink: /docs/services
 ---
 
-# AWS services
+# AWS Services
 {: .no_toc }
 
 ---
 
-This section will explain all the AWS services required for all the AWS Certifications.
+This section will explain all the AWS Services required for all the AWS Certifications.
