@@ -37,6 +37,7 @@ Backup plans are backup policies and basically say what the backup automation wi
 - **Backup Window**: what time range is more appropriate to run the backup.
 - **Cold Storage Transition**: sets when it becomes safe to transition the backup to a lower cost/lower resilience storage (ex. never, days, years, etc.)
 - **Retention Period**: defines how long it will be required to keep the backup (ex. always, days, months, etc.)
+- **Copy to destination**: copy the backup to another region.
 
 AWS Backup -> Backup Plan for an AWS Service -> Backup automatically saved to an S3 Bucket.
 
