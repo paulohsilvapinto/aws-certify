@@ -18,3 +18,5 @@ grand_parent: AWS Services
 | **EC2 Instance Termination** | Root Volumes are terminated by default                                                                            | Not impacted                                           | Terminated with the instance            |
 | **OS Compatibility**         | Linux and Windows                                                                                                 | Only Linux                                             | Linux and Windows                       |
 | **Cost**                     | Lower                                                                                                             | Higher                                                 | EC2 Cost                                |
+| **Lambda integration**       | No                                                                                                                | Yes                                                 | Lambda has up to 10MB of ephemeral storage                             |
+

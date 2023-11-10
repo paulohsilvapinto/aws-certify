@@ -26,6 +26,7 @@ grand_parent: AWS Services
 - Uses NFSv4.1 protocol.
 - Recommended for web serving, data management/sharing, etc.
 - They are only compatible with Linux-based images. **No compatibility with Windows images**.
+- AWS Lambda can integrate with EFS.
 
 ## Performance
 
