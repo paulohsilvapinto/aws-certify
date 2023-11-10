@@ -4,12 +4,12 @@
 
 - It is a managed Network file system (NFS), but differently from the EBSs, they work on **multiple AZs** and must be set inside of a VPC Security Group for access control.
 - **More expensive** than EBS, but it is **paid per use**. No capacity provisioning here - file system will scale automatically.
-- Highly available (multi-AZ) and higly scalable.
+- Highly available (multi-AZ) and highly scalable.
 - Files are **encrypted at rest with KMS**.
 - An EFS may be attached to multiple EC2 instances and an instance may have multiple EFSs attached to it.
 - Uses NFSv4.1 protocol.
 - Recommended for web serving, data management/sharing, etc.
-- They are only compatible with Linux based images. **No compatibility with Windows images**.
+- They are only compatible with Linux-based images. **No compatibility with Windows images**.
 
 ## Performance
 
@@ -17,7 +17,7 @@ It is possible to set the Performance Mode and the Throughput Mode.
 
 ### Performance Mode
 
-Performance Mode is set the the EFS creation time and can be:
+Performance Mode is set the EFS creation time and can be:
 
 #### General Purpose
 
@@ -53,6 +53,6 @@ There are three types of Throughput mode:
 There are four different storage class and **files on a single EFS can be on diffent tiers (IA or non-IA)**. It is also possible to set **Lifecycle management rules**. The classes are:
 
  - **EFS Standard**: Data is replicated across multiple AZs. Ideal for frequently accessed files.
- - **Standard IA**: Infrequent access. Lower storage cost but file retrieval is paid.
- - **EFS One Zone** : Data is reclicated within a single AZ. Suitable for development environment. *Not suitable for production environment*.
+ - **Standard IA**: Infrequent access. There are lower storage cost, but file retrieval is paid.
+ - **EFS One Zone** : Data is replicated within a single AZ. Suitable for development environment. *Not suitable for production environment*.
  - **EFS One Zone IA**: over 90% cheaper than the rest.

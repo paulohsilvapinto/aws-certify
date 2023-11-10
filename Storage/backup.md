@@ -3,7 +3,7 @@
 ## General
 
 - Fully managed service.
-- Centralizes backup automation and managements across different AWS Services such as:
+- Centralizes backup automation and management across different AWS Services such as:
   - EC2 / EBS / EFS / FSx
   - S3
   - RDS / DocumentDB / Amazon Neptune
@@ -15,7 +15,7 @@
 
 ## Backup Plans
 
-Backup plans are backup policies and basically says what the backup automation will do:
+Backup plans are backup policies and basically say what the backup automation will do:
 
 - **Frequency**: cron expression of when the backup should be made.
 - **Backup Window**: what time range is more appropriate to run the backup.
