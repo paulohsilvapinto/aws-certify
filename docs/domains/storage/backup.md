@@ -21,10 +21,10 @@ nav_order: 5
 
 - Fully managed service.
 - Centralizes backup automation and management across different AWS Services such as:
-  - EC2 / EBS / EFS / FSx
-  - S3
-  - RDS / DocumentDB / Amazon Neptune
-  - Storage Gateway
+  - EC2 / EBS / EFS / FSx;
+  - S3;
+  - RDS / DocumentDB / Amazon Neptune;
+  - Storage Gateway.
 - Supports on-demand and scheduled backups.
 - Supports cross-account and cross-region backups.
 - Supports point-in-time recovery for supported services such as Amazon Aurora.
