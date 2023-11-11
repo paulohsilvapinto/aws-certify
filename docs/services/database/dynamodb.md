@@ -32,11 +32,11 @@ grand_parent: AWS Services
 - **Anti-patterns** include: using for data that requires complex transactional data and SQL instructions; modifying from a relational database to a NoSQL database if the application was prepared to work with a relational DB. 
 - **Large objects** cannot be stored directly on DynamoDb due to the limitation of file size, but a typical pattern is storing the data in S3 and the metadata in the DynamoDB table.
 
-> {: .note }
-> > In general: 
-> > - Large volume of data with multiple reads and write requests: DynamoDB;
-> > - Large volume of data, but data is not retrieved/modified frequently: S3;
-> > - Transactional data with complex SQL instructions: RDS.
+{: .note }
+> In general: 
+> - Large volume of data with multiple reads and write requests: DynamoDB;
+> - Large volume of data, but data is not retrieved/modified frequently: S3;
+> - Transactional data with complex SQL instructions: RDS.
 
 ## Primary Keys
 

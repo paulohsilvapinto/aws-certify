@@ -3,7 +3,7 @@ description: Learning material for AWS Certifications!
 theme: just-the-docs
 url: https://paulohsilvapinto.github.io/aws-certify
 repository: paulohsilvapinto/aws-certify # for github-metadata
-permalink: pretty
+# permalink: pretty
 
 aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
