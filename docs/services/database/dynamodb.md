@@ -3,6 +3,7 @@ layout: default
 title: DynamoDB
 parent: Databases
 grand_parent: AWS Services
+math: katex
 ---
 
 # DynamoDB
@@ -70,3 +71,9 @@ Table capacity is defined by the RCU (Read Capacity Units) and WCU (Write Capaci
 ### WCU (Write Capacity Units)
 
 - WCU represents one item per second for an item of up to 1 KB in size (rounded up).
+
+$$
+\begin{equation}
+\int_0^x \sin(x) dx
+\end{equation}
+$$

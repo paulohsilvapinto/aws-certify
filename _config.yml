@@ -73,7 +73,6 @@ callouts:
     title: Important!
     color: yellow
   note:
-    title: Note
     color: purple
 
 exclude:
