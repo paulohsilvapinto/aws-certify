@@ -76,3 +76,4 @@ Table capacity is defined by the RCU (Read Capacity Units) and WCU (Write Capaci
 > $$
 > WCU = ItemsPerSecond * \frac{ItemSizeKb}{1Kb}
 > $$
+> \* Item size in KB must be rounded up.
