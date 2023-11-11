@@ -72,8 +72,7 @@ Table capacity is defined by the RCU (Read Capacity Units) and WCU (Write Capaci
 
 - WCU represents one item per second for an item of up to 1 KB in size (rounded up).
 
-$$
-\begin{equation}
-\int_0^x \sin(x) dx
-\end{equation}
-$$
+{: .note }
+> $$
+> WCU = ItemsPerSecond * \frac{ItemSizeKb}{1Kb}
+> $$
