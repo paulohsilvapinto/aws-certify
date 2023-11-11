@@ -23,7 +23,7 @@ math: katex
 ## General
 
 - NoSQL database. It is serverless, fully managed, and replicated across multi-AZs. It can handle a vast amount of data due to its distributed nature. It is a low-cost service and can adapt well to the workload with its auto-scaling capabilities.
-- No support for query joins and aggregations.
+- Limited SQL support with PartiQL which allows SELECT, INSERT, UPDATE, and DELETE. There is no support for query joins and aggregations.
 - The Primary Key must be created at the table creation time. The same goes for the Sort Key; however, unlike the Primary Key, a Sort Key is not mandatory.
 - Each row can have a maximum of **400KB**, and the attributes (fields) can store nested data like list, map, and set, just like a JSON record.
 
@@ -61,16 +61,28 @@ Per table, can be:
 - Standard
 - Infrequent Access
 
+## Read Consistency Modes
+
+DynamoDB data is replicated across multi-AZs. The data you are trying to read, maybe is being fetched from a different node than the one the data was originally written. The data could be out-of-date in the replicated node depending on the time interval between the write and the read operations. 
+
+Considering this scenario, there are two options for Read Consistency mode, which you can set for each GET API request:
+
+- **Eventually Consistent Read**: You may get stale data, but it is cheaper. This is the default mode.
+- **Strongly Consistent Read**: It ensures no stale data will be retrieved, but will double the RCU consumption and may introduce additional latency.
+
 ## Capacity Modes
 
 Table capacity is defined by the RCU (Read Capacity Units) and WCU (Write Capacity Units). There are two modes for setting these variables, and it's possible to change between them once every 24 hours. They can be:
 
-- **Provisioned**: RCU and WCU must be supplied according to the expected workload and you can optionally enable the auto-scale. They can be exceeded momentarily. In this case, the extra consumption will come from the **Burst Capacity**. If the Burst Capacity is depleted, a *ProvisionedThroughputExceededException* will be raised. Exponential backoff is recommended to normalize the operation.
-- **On-demand**: Automatically scales RCU and WCU up or down, but is more expensive than Provisioned mode.
+- **Provisioned**: RCU and WCU must be supplied according to the expected workload and you can optionally enable the auto-scale and set the min, max, and target percentage values for the auto-scale to operate. RCU and WCU can be exceeded momentarily. In this case, the extra consumption will come from the **Burst Capacity**. If the Burst Capacity is depleted, a *ProvisionedThroughputExceededException* will be raised. Exponential backoff is recommended to normalize the operation.
+- **On-demand**: Automatically scales RCU and WCU up or down, but is more expensive than Provisioned mode. There is no throttling in this mode. Ideal for hard-to-predict workloads.
+
+{: .important }
+> RCUs and WCUs are divided evenly between all table partitions. This is an important reason for avoiding hot partitions!
 
 ### WCU (Write Capacity Units)
 
-- WCU represents one item per second for an item of up to 1 KB in size (rounded up).
+WCU represents one item per second for an item of up to 1 KB in size (rounded up). So the required WCU will be:
 
 {: .note }
 > $$
@@ -78,3 +90,34 @@ Table capacity is defined by the RCU (Read Capacity Units) and WCU (Write Capaci
 > $$
 > 
 > \* Item size in KB must be rounded up.
+
+### RCU (Read Capacity Units)
+
+RCU represents one Strongly Consistent Read or two Eventually Consistent Reads per second for an item for up to 4KB.
+
+{: .note }
+> $$RCU_{strongly\_consistent} = ItemsPerSecond * \frac{ItemSizeKb}{4Kb}
+> \newline\newline
+> RCU_{eventually\_consistent} = \frac{ItemsPerSecond}{2} * \frac{ItemSizeKb}{4Kb}
+> $$
+> 
+> \* Item size in KB must be rounded up to the next multiple of 4. For example, if item size is 10KB we must consider it to be 12KB.
+
+## Indexes
+
+There are two index options in DynamoDB. Both of them allow the Attribute Projection selection, which can be *KEYS_ONLY, INCLUDE or ALL*.
+They can be used when there is a need to retrieve the data by different keys. **Remember:** *GetItem* or *Query* filters by the keys only. Any non-key attribute is filtered client-side, incurring RCU consumption.
+
+### Local Secondary Index (LSI)
+
+- LSIs provide an alternative sort key; the partition key will be the same as the base table (hence "Local": data stays in the same partitions as in the base table).
+- Each table is allowed to have up to five LSIs, and they must be defined at the table creation time.
+- Uses RCUs and WCUs of the base table. There is no provisioning for LSI.
+
+### Global Secondary Index (GSI)
+
+- GSIs provide an alternative Primary Key (be it HASH only or HASH + RANGE), and they can be created anytime. It is essentially a new table with shared data between them.
+- RCUs and WCUs must be provisioned for the index. It does not use the same as the base table.
+
+{: .important }
+> If writes are throttled in the GSI, then the main table will also be throttled, no matter the WCU consumption in the base table, as the data has to be written to both tables mandatorily.
