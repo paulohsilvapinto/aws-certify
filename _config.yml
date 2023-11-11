@@ -53,6 +53,6 @@ callouts:
     color: red
   important:
     title: Important!
-    color: yellow-200
+    color: yellow
   info:
-    color: grey-lt-300
+    color: grey-lt
