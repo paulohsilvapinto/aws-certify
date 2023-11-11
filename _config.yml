@@ -1,8 +1,9 @@
 title: AWS Certify
 description: Learning material for AWS Certifications!
 theme: just-the-docs
-
-url: https://just-the-docs.github.io
+url: https://paulohsilvapinto.github.io/aws-certify
+repository: paulohsilvapinto/aws-certify # for github-metadata
+permalink: pretty
 
 aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
@@ -12,6 +13,23 @@ color_scheme: dark
 enable_copy_code_button: true
 search_enabled: true
 nav_sort: case_insensitive
+
+# Footer content
+back_to_top: true
+back_to_top_text: "Back to top"
+footer_content: ""
+
+# Footer last edited timestamp
+last_edit_timestamp: true
+last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
+
+# Footer "Edit this page on GitHub" link text
+gh_edit_link: true # show or hide edit this page link
+gh_edit_link_text: "Edit this page on GitHub"
+gh_edit_repository: "https://github.com/paulohsilvapinto/aws-certify" # the github URL for your repo
+gh_edit_branch: "master" # the branch that your docs is served from
+gh_edit_source: docs # the source that your files originate from
+gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
 
 search:
   # Split pages into sections that can be searched individually
@@ -54,5 +72,34 @@ callouts:
   important:
     title: Important!
     color: yellow
-  info:
-    color: grey-lt
+  note:
+    title: Note
+    color: purple
+
+exclude:
+ # from https://github.com/jekyll/jekyll/blob/master/lib/site_template/_config.yml:
+   - .sass-cache/
+   - .jekyll-cache/
+   - gemfiles/
+   - Gemfile
+   - Gemfile.lock
+   - node_modules/
+   - vendor/bundle/
+   - vendor/cache/
+   - vendor/gems/
+   - vendor/ruby/
+ # specific to the theme website:
+   - bin/
+   - lib/
+   - "*.gemspec"
+   - "*.gem"
+   - LICENSE.txt
+   - package.json
+   - package-lock.json
+   - Rakefile
+   - README.md
+   - CODE_OF_CONDUCT.md
+   - docker-compose.yml
+   - Dockerfile
+ # theme test code
+   - fixtures/
