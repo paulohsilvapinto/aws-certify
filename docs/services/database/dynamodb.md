@@ -58,4 +58,15 @@ There are two options for the primary keys, and you must choose at the table cre
 Per table, can be:
 
 - Standard
-- Infrequent Access 
+- Infrequent Access
+
+## Capacity Modes
+
+Table capacity is defined by the RCU (Read Capacity Units) and WCU (Write Capacity Units). There are two modes for setting these variables, and it's possible to change between them once every 24 hours. They can be:
+
+- **Provisioned**: RCU and WCU must be supplied according to the expected workload and you can optionally enable the auto-scale. They can be exceeded momentarily. In this case, the extra consumption will come from the **Burst Capacity**. If the Burst Capacity is depleted, a *ProvisionedThroughputExceededException* will be raised. Exponential backoff is recommended to normalize the operation.
+- **On-demand**: Automatically scales RCU and WCU up or down, but is more expensive than Provisioned mode.
+
+### WCU (Write Capacity Units)
+
+- WCU represents one item per second for an item of up to 1 KB in size (rounded up).
