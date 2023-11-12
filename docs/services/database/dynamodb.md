@@ -32,6 +32,7 @@ math: katex
 - DynamoDB is recommended for a variety of scenarios such as Mobile apps, IoT, Gaming, etc,
 - **Anti-patterns** include: using for data that requires complex transactional data and SQL instructions; modifying from a relational database to a NoSQL database if the application was prepared to work with a relational DB. 
 - **Large objects** cannot be stored directly on DynamoDb due to the limitation of file size, but a typical pattern is storing the data in S3 and the metadata in the DynamoDB table.
+- Another useful pattern is to enable an S3 Notification event to a Lambda Function and store the S3 object's metadata in a DynamoDB table to create a Data Catalogue and index S3's metadata.
 
 {: .note }
 > In general: 
@@ -104,7 +105,7 @@ RCU represents one Strongly Consistent Read or two Eventually Consistent Reads p
 
 ## Indexes
 
-There are two index options in DynamoDB. Both of them allow the Attribute Projection selection, which can be *KEYS_ONLY, INCLUDE or ALL*.
+There are two index options in DynamoDB. Both of them allow the Attribute Projection selection, which can be *KEYS_ONLY, INCLUDE, or ALL*.
 They can be used when there is a need to retrieve the data by different keys. **Remember:** *GetItem* or *Query* filters by the keys only. Any non-key attribute is filtered client-side, incurring RCU consumption.
 
 ### Local Secondary Index (LSI)
@@ -120,3 +121,59 @@ They can be used when there is a need to retrieve the data by different keys. **
 
 {: .important }
 > If writes are throttled in the GSI, then the main table will also be throttled, no matter the WCU consumption in the base table, as the data has to be written to both tables mandatorily.
+
+## Time to Live (TTL)
+
+TTL automatically deletes items from a table and their indexes (LSI and GSI) without using WCUs, by taking a pre-assigned table attribute (field) containing a *number* with a *Unix Epoch Timestamp* as the delete condition. Expired items are guaranteed to be deleted within 48 hours of expiration, so they may be retrieved in a SELECT in the meantime. TTL operations are also streamed by the DynamoDB Streams. Useful for GDPR compliance, for example.
+
+## Caching
+
+### DynamoDB Accelerator (DAX)
+
+DAX is a secure, multi-AZ cluster of up to 11 nodes for in-memory caching for DynamoDB. It is fully managed and highly available. Reduces query latency and helps solve the *Hot Key* issue - instead of consuming RCU, the result will come quicker from the cache.
+
+Properties:
+
+- The cache has a default TTL (Time to Live) of five minutes.
+- Encryption at rest, KMS, VPC, IAM, etc.
+- There are two family types of nodes available: *t-type* for low-throughput use cases and *r-type* for always-ready capacity. Within each family type, it is possible to choose the compute size (CPU and memory) of the node: small, medium, large, xlarge, etc.
+- For high availability and production environments, it is recommended setting up a cluster of at least three nodes for multi-AZ and high availability.
+- Each cluster can serve the cache of one or more DynamoDB tables.
+
+```mermaid
+  flowchart TD
+    Client[Client] --> |GetRequest| DAX?{DAX Cluster. \nCache Exists?}
+    DAX? --> |Yes| Response[/Response/]
+    DAX? --> |No| Dynamo[(DynamoDB)]
+    Dynamo --> Response
+    Dynamo --> DAX[Update DAX Cache]
+```
+
+### Amazon Elasticache
+
+While DAX is handy for GET and Query requests, it does not help cache aggregated responses. For this scenario, where you have an application applying transformations to the same rows, such as aggregation, Elasticache is the go-to solution. It does not integrate directly with DynamoDB. Instead, it is the application that has to integrate with it.
+
+Depending on the scenario, using both DAX and Elasticache may make sense.
+
+## DynamoDB Streams
+
+Provides a stream of any item modification (create/update/delete) that happened in a table **after the stream was enabled**, containing a batch of records with either *KEYS_ONLY*, *NEW_IMAGE*, *OLD_IMAGE*, or *NEW_AND_OLD_IMAGES*. The stream can be integrated with AWS Lambda, Kinesis Data Streams, and Kinesis Client Library applications. It has a limited retention time of up to 24 hours. Data can be persisted on S3 via Kinesis for long-term storage.
+
+Similar to Kinesis, DynamoDB streams are also made up of Shards, but in this case, their provision is automated by AWS.
+
+Use cases are:
+    - Analytics
+    - React to events (send order confirmation by email/message)
+    - Insert into OpenSearch Service
+    - Implement cross-region replication
+
+## Security
+
+- Allows access via private network with a VPC.
+- Access is fully controlled with IAM.
+- Encryption at rest with KSM and in-transit with SSL/TLS.
+- Backup and Point-In-Time Recovery with no performance impact.
+- Global tables for lower latency and higher availability (requires DynamoDB Streams enabled).
+- **Fine-grained access control**: IAM Roles with condition on *LeadingKeys* allow row-level access control, whereas conditions on *Attributes* allow column-level access control.
+
+A common architecture for User/Application access to DynamoDB data is to authenticate with an Identity Provider, such as Amazon Cognito, and obtain temporary AWS Credentials, which allows the Client to obtain an IAM Role with fine-grain access control for accessing the required data.
