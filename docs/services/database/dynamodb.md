@@ -96,10 +96,9 @@ WCU represents one item per second for an item of up to 1 KB in size (rounded up
 RCU represents one Strongly Consistent Read or two Eventually Consistent Reads per second for an item for up to 4KB.
 
 {: .note }
-> $$RCU_{strongly\_consistent} = ItemsPerSecond * \frac{ItemSizeKb}{4Kb}
-> \newline\newline
-> RCU_{eventually\_consistent} = \frac{ItemsPerSecond}{2} * \frac{ItemSizeKb}{4Kb}
-> $$
+> $$RCU_{strongly\_consistent} = ItemsPerSecond * \frac{ItemSizeKb}{4Kb}$$
+> 
+> $$RCU_{eventually\_consistent} = \frac{ItemsPerSecond}{2} * \frac{ItemSizeKb}{4Kb}$$
 > 
 > \* Item size in KB must be rounded up to the next multiple of 4. For example, if item size is 10KB we must consider it to be 12KB.
 
