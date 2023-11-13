@@ -33,7 +33,7 @@ It is a hosted and faster alternative to either MySQL or PostgreSQL. It can stor
 
 Another flavour of Amazon Aurora that offers a fully-managed RDS with automatic scaling capabilities. Ideal for scenarios where the workload fluctuates frequently.
 
-### ACID
+## ACID
 
 Atomic
 : If part of the transaction fails, then the whole transaction fails.
