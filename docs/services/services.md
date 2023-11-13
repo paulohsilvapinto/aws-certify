@@ -3,7 +3,6 @@ layout: default
 title: AWS Services
 nav_order: 2
 has_children: true
-permalink: /docs/services
 ---
 
 # AWS Services
