@@ -3,7 +3,6 @@ layout: default
 title: Storage
 parent: AWS Services
 has_children: true
-permalink: /docs/services/storage
 ---
 
 # Storage

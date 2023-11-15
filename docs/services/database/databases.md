@@ -3,7 +3,6 @@ layout: default
 title: Databases
 parent: AWS Services
 has_children: true
-permalink: /docs/services/database
 ---
 
 # Databases
