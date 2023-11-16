@@ -12,6 +12,9 @@ nav_order: 3
 ACID
 : *Atomic, Consistent, Isolated, and Durable*. They are generally used to define the properties of a relationl database. 
 
+AMI
+: *Amazon Machine Image*. It is a base image for an EC2 instance.
+
 AS2
 : *Applicability Statement 2* protocol.
 
@@ -32,6 +35,9 @@ FTP
 
 FTPS
 : *File Transfer Protocol Secure*. Data is encrypted.
+
+HPC
+: *High Performance Computing*.
 
 HSM
 : *Hardware Security Module*. A physical computing device that safeguards and manages secrets, performs encryption and decryption functions.
