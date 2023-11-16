@@ -21,13 +21,13 @@ grand_parent: AWS Services
 
 ## General
 
-The AWS Snow family provides physical devices for offline data migration to *or* from AWS, but from AWS to AWS (for this scenario, there are other options such as [S3 Replication](https://paulohsilvapinto.github.io/aws-certify/docs/services/storage/s3.html#s3-replication)). They are useful when there is limited / no / shared internet connectivity, and the data would take more than a week to be migrated.
+The AWS Snow family provides physical devices for offline data migration to *or* from AWS, but from AWS to AWS (for this scenario, there are other options, such as [S3 Replication](https://paulohsilvapinto.github.io/aws-certify/docs/services/storage/s3.html#s3-replication)). They are useful when there is limited / no / shared internet connectivity, and the data would take more than a week to be migrated.
 
 It is reliable, secure, and tamper-free. Data is encrypted with KMS, and it can be mounted as an NFS (*Network File System*) device.
 
 There are three main options in the Snow Family:
 
-- **Snowcone**: more compact and lightweight of the options. Available with SSD or HDD. Does not come with a battery. It is useful when a *Snowball* device is too much or too big. It is also ready to be used with [AWS DataSync](https://paulohsilvapinto.github.io/aws-certify/docs/services/migration/docs/services/migration/datasync.html).
+- **Snowcone**: more compact and lightweight of the options. Available with SSD or HDD. Does not come with a battery. It is useful when a *Snowball* device is too much or too big. It is also ready to be used with [AWS DataSync](datasync.html).
 - **Snowball**: used to migrate TB or PBs of data. Available with SSD or HDD, as Storage Optimized or Compute Optimized, with or without GPU.
 - **Snowmobile**: It's a truck that supports up to 100PB of data. If the migration size is more than 10PB, *Snowmobile* is the go-to option.
 
