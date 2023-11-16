@@ -50,7 +50,7 @@ The snapshots are *incremental-only* - the last version always contain all the d
 
 It is recommended to execute a snapshot when there is low traffic and/or to detach the instance first, as snapshots consume IO.
 
-Snapshots are useful for backup, for moving data to another AZ, and for creating AMI (Amazon Managed Image) from them.
+Snapshots are useful for backup, for moving data to another AZ, and for creating AMI (Amazon Machine Image) from them.
 
 *Amazon Lifecycle Manager* allows the snapshot automation.
 
