@@ -56,9 +56,8 @@ Snapshots are useful for backup, for moving data to another AZ, and for creating
 
 ## RAID Configurations
 
-RAID are ways of combining multiple Physical Disks for better storage, security and/or performance. 
-
-Even though for EBS Volumes only RAID0 and RAID1 are recommended, the RAID options available are dependent exclusively on the Operating System.
+RAID is a  way of combining multiple Physical Disks for better storage, security, and/or performance. 
+Even though for EBS Volumes only RAID0 or RAID1 is recommended, the available RAID options depend exclusively on the Operating System.
 
 ### RAID0
 
