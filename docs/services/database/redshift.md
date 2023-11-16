@@ -77,9 +77,9 @@ The number of slices is dependent on the node size (type). The data can be distr
 
 Instead of storing the data in the compute node, RMS gives the ability to store the data on S3 and provides an SSD for caching. This allows the compute nodes to be provisioned by their compute needs only.
 
-{: . note }
-- Hot data stored on S3
-- Cold data stored on SSD
+{: .note }
+> - Hot data stored on S3
+> - Cold data stored on SSD
 
 ## Cluster Resizing
 
@@ -108,7 +108,10 @@ Redshift will automatically store three copies of the data for multi-node cluste
 - Copy on other compute nodes inside the cluster, to be used in case of node failure.
 - Copy on S3 for backup purposes.
    
-It is possible to create automatic snapshots on S3 in another region asynchronously for disaster recovery. By default, they are stored for one day, but it can be increased to up to 35 days.
+It is possible to create automatic snapshots on S3 in another region asynchronously for disaster recovery. By default, they are stored for one day, but it can be increased to up to 35 days. 
+
+{: .important }
+When a Redshift Cluster is terminated, all automatic generated snapshots are deleted from S3, so remember to generate a manual snapshot before termination. 
 
 To recover from a snapshot, AWS will create a new cluster in parallel with the snapshot and then make the failover to the new cluster.
 
@@ -143,11 +146,21 @@ The modes are:
 
 It is possible to check the distribution mode of a table by querying the *PG_CLASS_INFO* table.
 
+### Choosing the Distribution Mode
+
+A general step-by-set is to:
+
+1. Specify all the Primary Keys and Foreign Keys of all tables.
+2. Distribute the fact table and the main dimension table by the most significant/used join key. Each table can only be distributed by a single key.
+3. Small and Slow-moving tables can be distributed as *ALL* if required by joins.
+4. Distribute the other tables by Primary Key or Foreign Key depending on how they are most frequently used for joins.
+5. Any table not used on joins or with no clear usage pattern, use *EVEN* distribution.
+
 ## Table Constraints
 
 - *NOT NULL* constraint must be respected when loading data into a Redshift Table.
 
-{: . important}
+{: .important }
 *Unique / Primary / Foreign Keys* are not enforced by Redshift. Even still, it is a best practice to set them up so that the query optimizer can work better.
 
 ## Sort Keys
@@ -196,25 +209,63 @@ For narrow tables (a lot of rows but a small set of columns), it is better to lo
 
 To validate the command, use the parameter *NOLOAD*. It is much faster because it does not write the data into the Cluster.
 
-{: . note }
+{: .note }
 When data is loaded with *INSERT INTO*, the command is executed on the Leader Node, which is the reason for being slower.
 
-{: . important}
+{: .important }
 Use *Enhanced VPC Routing* to force the S3 data to go through the VPC. Otherwise, the data will go through the public internet. Use *Internet Gateway* for services outside of the VPC or *NAT Gateway* for S3 buckets in other regions.
+
+#### Copy from DynamoDB
+
+- Use the *READ RATIO* parameter to limit the RCU used.
+- The column/attribute matching is case insensitive. If there are two attibutes like ATT1 and att1, the COPY will fail.
+- Attributes that do not exist in the target Redshift table are ignored.
+- Columns that do not exist in the source DynamoDB table are set as Null or Empty.
+- Complex data types such as *SET* are not supported.
+
+### Deep Copy
+
+Deep Copy is actually a series of commands that recreates and repopulates a table by using a bulk insert, which automatically sorts the table. If a table has a large unsorted Region, a deep copy is much faster than a vacuum.
+
+1. (Optional) Recreate the table DDL by running a script called v_generate_tbl_ddl.
+2. Create a copy of the table using the original CREATE TABLE DDL.
+3. Use an INSERT INTO … SELECT statement to populate the copy with data from the original table.
+4. Check for permissions granted on the old table. You can see these permissions in the SVV_RELATION_PRIVILEGES system view.
+5. If necessary, grant the permissions of the old table to the new table.
+6. Grant usage permission to every group and user that has privileges in the original table. This step isn't necessary if your deep copy table is in the public schema, or is in the same schema as the original table.
+7. Drop the original table.
+8. Use an ALTER TABLE statement to rename the copy to the original table name.
+
+Alternatively, it is possible to:
+
+```sql
+  CREATE TABLE temp_name AS (SELECT * FROM original_table);
+
+  TRUNCATE TABLE original_table;
+
+  INSERT INTO original_table (SELECT * FROM temp_table);
+```
+
+{: .note }
+Temporary tables are dropped when the transaction is completed and TRUNCATE table commits immediately. Therefore, there is a real risk of losing data. So use this option only when really necessary.
 
 ### VACUUM
 
-Performs re-sort of all the data and recovers storage used by deleted data. It's important also to run *ANALYZE* to update the table statistics.
+Performs re-sort of all the data and recovers storage used by deleted data. It's also important to run *ANALYZE* (on the entire database, on a table, or on some columns of a table) to update the table statistics.
 
 *VACUUM DELETE ONLY* only recovers the storage used by deleted records.
 
 *VACUUM SORT ONLY* only reorders the data.
 
-*VACUUM REINDEX* should be used when there is no Sort Key on the table or when data skewness is identified. Reinitializes Interleaved indexes.
+*VACUUM REINDEX* should be used when there is no Sort Key on the table or when data skewness is identified. Reinitializes Interleaved indexes. It is considerably slower then *VACUUM* only.
 
 ### UNLOAD
 
 Used for extracting data from Redshift into S3 in a parallel fashion. It is possible to turn off the parallelism to get a single file as output (max file size is 6.2GB). File is automatically encrypted with SSE-S3.
+
+### TRUNCATE
+
+Deletes all the data of a table and is very fast. The *TRUNCATE* command commits immediately, even inside of a transaction block, which may cause data loss if used incorrectly.
 
 ### GRANT or REVOKE
 
@@ -231,6 +282,10 @@ By default, the cache is enabled for some frequently used queries. To disable it
 ### CREATE EXTERNAL FUNCTION
 
 See [Lambda UDF](#lambda-udf).
+
+### BULK INSERT or Multi-row Insert
+
+It is always preferable to use *COPY*. When it is not possible, however, *BULK INSERT* becomes the best alternative.
 
 ### Materialized Views
 
@@ -299,7 +354,7 @@ Query Groups
 : Sets which query labels will be assigned to the queue. For example: Finance, Analytics, Critical, etc.
 
 Query monitoring rules
-: Allows the query priority to change according to some pre-defined rules.
+: Allows the query priority to change according to some pre-defined rules. Allow some actions as: *change priority* (for *Auto WLM*), *log*, *abort* and *hop* (for *Manual WLM*).
 
 ### Manual WLM
 
@@ -335,7 +390,13 @@ By default, the RPU mode is set to AUTO. However, it is possible to set a range 
 
 Enables us to unload Redshift data to S3 in a partitioned Parquet file.
 
-## Lambda UDF
+## UDFs and Stored Procedures
+
+### Redshift UDF
+
+Supports SQL or Python.
+
+### Lambda UDF
 
 It is possible to use a Lambda function (same account or cross-account but same region) as a UDF SQL Function. Redshift and Lambda will communicate using JSON. The only requirement is to *GRANT USAGE ON LANGUAGE EXFUNC*.
 
@@ -345,6 +406,10 @@ CREATE EXTERNAL FUNCTION function_name(param1_type, paramN_type)
 RETURNS return_type VOLATILE LAMBDA 'lambda_name'
 IAM_ROLE 'arn:aws:iam:...'; 
 ```
+
+### Stored Procedures
+
+Similar to UDF, but are defined using PL/pgSQL (PostgreSQL Procedural Language) and are able to execute DDL and DML operations.
 
 ## Federated Queries
 
@@ -365,3 +430,7 @@ A distributed and hardware-accelerated cache at no extra cost. Requires *RA3* no
 
 - A client and server certificate must be used to connect the HSM module and the Redshift Cluster.
 - There is no way of directly creating an HSM-encrypted cluster from a snapshot of a non HSM-encrypted cluster. To do that, one must first create an HSM-encrypted cluster and then migrate (copy) the data from a non-encrypted one.
+
+## Redshift Advisor
+
+Gives recommendations on performance improvement and cost reduction.

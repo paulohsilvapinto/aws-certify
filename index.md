@@ -12,4 +12,4 @@ permalink: /
 Learning Material for AWS Certifications
 {: .fs-6 .fw-300 }
 
-Use the menu to navigate through the menu.
+Use the menu to navigate through the content.

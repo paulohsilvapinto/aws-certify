@@ -21,16 +21,16 @@ grand_parent: AWS Services
 
 ## General
 
-- Fully managed service.
-- Centralizes backup automation and management across different AWS Services such as:
+- AWS Backup is a cost-effective, fully managed, policy-based service that simplifies data protection at scale by centralizing backup automation and management across different AWS Services such as:
   - EC2 / EBS / EFS / FSx;
   - S3;
-  - RDS / DocumentDB / Amazon Neptune;
+  - RDS / DocumentDB / Amazon Neptune / DynamoDB;
   - Storage Gateway.
-- Supports on-demand and scheduled backups.
-- Supports cross-account and cross-region backups.
+- Supports on-demand and scheduled backups, cross-account, and cross-region.
 - Supports point-in-time recovery for supported services such as Amazon Aurora.
 - Backup automation can be tag-based.
+
+![AWS Backup](https://d1.awsstatic.com/products/backup/Product-Page-Diagram_AWS-Backup%402x.9a3f6d1b456ddadac992018c5b308bb1d9e8c055.png)
 
 ## Backup Plans
 

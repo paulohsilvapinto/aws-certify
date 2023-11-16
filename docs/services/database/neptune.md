@@ -21,7 +21,5 @@ grand_parent: AWS Services
 
 ## General
 
-A fully-managed, highly available (3 AZs) graph database service.
-
-- Up to 15 read replicas.
-- Recommended for social networking, fraud detection, etc.
+A fully-managed, highly available (3 AZs) graph database service, supporting up to 15 read replicas.
+It is recommended for social networking, fraud detection, etc.

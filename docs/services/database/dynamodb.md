@@ -35,7 +35,8 @@ math: katex
 - Another useful pattern is to enable an S3 Notification event to a Lambda Function and store the S3 object's metadata in a DynamoDB table to create a Data Catalogue and index S3's metadata.
 
 {: .note }
-> In general: 
+> In general:
+>  
 > - Large volume of data with multiple reads and write requests: DynamoDB;
 > - Large volume of data, but data is not retrieved/modified frequently: S3;
 > - Transactional data with complex SQL instructions: RDS.
