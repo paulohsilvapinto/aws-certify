@@ -78,8 +78,8 @@ The number of slices is dependent on the node size (type). The data can be distr
 Instead of storing the data in the compute node, RMS gives the ability to store the data on S3 and provides an SSD for caching. This allows the compute nodes to be provisioned by their compute needs only.
 
 {: .note }
-> - Hot data stored on S3
-> - Cold data stored on SSD
+> - Hot data stored on SSD
+> - Cold data stored on S3
 
 ## Cluster Resizing
 
