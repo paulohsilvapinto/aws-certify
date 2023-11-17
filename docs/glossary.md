@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Glossary
-nav_order: 3
+nav_order: 4
 ---
 
 # Glossary
@@ -30,6 +30,9 @@ DDoS
 DNS
 : *Domain Name System*: turns domain names into IP addresses.
 
+FIFO
+: *First in, First out*. It is a method for managing items in a queue.
+
 FTP
 : *File Transfer Protocol*. Data is **not** encrypted.
 
@@ -41,6 +44,12 @@ HPC
 
 HSM
 : *Hardware Security Module*. A physical computing device that safeguards and manages secrets, performs encryption and decryption functions.
+
+LIFO
+: *Last in, First out*. It is a method for managing items in a queue.
+
+ML
+: *Machine Learning*.
 
 NFS
 : Network File System

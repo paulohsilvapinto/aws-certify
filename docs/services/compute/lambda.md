@@ -21,7 +21,7 @@ grand_parent: AWS Services
 
 ## General
 
-AWS Lambda is a serverless, event-driven compute service that lets you run code in any programming language for virtually any type of application, backend service, or for integrating different AWS services. They execute on-demand and are charged by the millisecond.
+AWS Lambda is a serverless, highly-available (no scheduled maintenance), event-driven compute service that lets you run code in any programming language for virtually any type of application, backend service, or for integrating different AWS services. They execute on-demand and are charged by the millisecond.
 
 Multiple instances of the same function can run simultaneously, but each of them can run for up to 15 minutes. 
 
@@ -60,6 +60,20 @@ They can have from 128MB up to 10GB of RAM. The RAM size has a direct relation w
 - Long processes;
 - Dynamic websites;
 - Stateful Applications.
+
+## Storage options
+
+|                                          | Ephemeral Storage /tmp       | Lambda Layers                                    | Amazon S3                          | Amazon EFS                                    |
+| ------------------------------------ | ---------------------------- | ------------------------------------------------ | ---------------------------------- | --------------------------------------------- |
+| **Max. Size**                            | 10GB / 512MB for temp folder | up to 5 layers per function for a total of 250MB | Elastic                            | Elastic                                       |
+| **Persistence**                          | Ephemeral                    | Durable                                          | Durable                            | Durable                                       |
+| **Content**                              | Dynamic                      | Static                                           | Dynamic                            | Dynamic                                       |
+| **Storage Type**                         | File System                  | Archive                                          | Object                             | File System                                   |
+| **Pricing**                              | Included                     | Included                                         | Storage + Requests + Data Transfer | Storage + Data Transfer + Throughput          |
+| **Permissions**                          | N/A  (Function only)         | IAM                                              | IAM                                | IAM + NFS                                     |
+| **Shared Across Concurrent Invocations** | No                           | Yes                                              | Yes                                | Yes                                           |
+| **Use cases**                            | Temporary files              | Code dependencies/libraries                      | Input files                        | Shared files across multiple lambda instances |
+| **Relative Speed**                       | Fastest                      | Fastest                                          | Slowest                            | Intermediate                                  |
 
 ## Lambda + Kinesis
 
