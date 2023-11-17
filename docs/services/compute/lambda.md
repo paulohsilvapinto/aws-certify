@@ -35,7 +35,7 @@ They can have from 128MB up to 10GB of RAM. The RAM size has a direct relation w
 - Kinesis: for real-time data processing;
 - DynamoDB: for real-time event reaction. For example, sending a welcome message when a new user is added to the database. DynamoDB can also be used for *stateful* applications;
 - S3: with bucket notifications. For example, for removing PII data;
-- Cloudfront: [Lambda@Edge](#lambda@edge);
+- Cloudfront: [Lambda@Edge](#lambdaedge);
 - Cloudwatch Events: actions triggered by Cloudwatch alarms or triggered based on a schedule using *CRON*-like specification.
 - SNS and SQS: to react to notifications;
 - Cognito: to authenticate users.
