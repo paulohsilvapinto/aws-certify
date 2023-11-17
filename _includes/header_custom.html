@@ -1,0 +1,19 @@
+<div>
+    <input type="checkbox" class="custom-toggle-dark-mode" id="custom-toggle-dark-mode">
+    <label for="custom-toggle-dark-mode" class="custom-toggle-dark-mode-label">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-sun"></i>
+      <span class="ball"></span>
+    </label>
+</div>
+
+<script> 
+    const toggleDarkMode = document.querySelector('.custom-toggle-dark-mode');
+    jtd.addEvent(toggleDarkMode, 'click', function(){ 
+        if (jtd.getTheme() === 'dark') { 
+            jtd.setTheme('light'); 
+        } else { 
+            jtd.setTheme('dark'); 
+        } 
+    }); 
+</script>
