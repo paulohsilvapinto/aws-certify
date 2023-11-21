@@ -27,7 +27,7 @@ Multiple instances of the same function can run simultaneously, but each of them
 
 They can have from 128MB up to 10GB of RAM. The RAM size has a direct relation with CPU and Network resources: more RAM equals better performance.
 
-[EFS disks](https://paulohsilvapinto.github.io/aws-certify/docs/services/storage/efs.html) can be attached to the lambda functions.
+[EFS disks](/docs/services/storage/efs.html) can be attached to the lambda functions.
 
 ## Main integrations
 
