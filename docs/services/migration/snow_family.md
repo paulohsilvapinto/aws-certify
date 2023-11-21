@@ -21,7 +21,7 @@ grand_parent: AWS Services
 
 ## General
 
-The AWS Snow family provides physical devices for offline data migration to *or* from AWS, but from AWS to AWS (for this scenario, there are other options, such as [S3 Replication](https://paulohsilvapinto.github.io/aws-certify/docs/services/storage/s3.html#s3-replication)). They are useful when there is limited / no / shared internet connectivity, and the data would take more than a week to be migrated.
+The AWS Snow family provides physical devices for offline data migration to *or* from AWS, but from AWS to AWS (for this scenario, there are other options, such as [S3 Replication](/docs/services/storage/s3.html#s3-replication)). They are useful when there is limited / no / shared internet connectivity, and the data would take more than a week to be migrated.
 
 It is reliable, secure, and tamper-free. Data is encrypted with KMS, and it can be mounted as an NFS (*Network File System*) device.
 
