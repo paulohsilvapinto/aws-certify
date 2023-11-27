@@ -60,7 +60,7 @@ These are the main instance family types available:
 
 ## AMI - Amazon Machine Image
 
-AMI is a snapshot of one or more [EBS](https://paulohsilvapinto.github.io/aws-certify/docs/services/storage/ebs.html) Disk, and can be used as a *boot* image for an EC2 Instance. AWS already has some managed AMI's with Linux, Windows, MacOS, etc.
+AMI is a snapshot of one or more [EBS](/docs/services/storage/ebs.html) Disk, and can be used as a *boot* image for an EC2 Instance. AWS already has some managed AMI's with Linux, Windows, MacOS, etc.
 
 They are region-bound, not global, but copying them to another region is possible.
 
@@ -131,7 +131,7 @@ The interface attachment can be:
 
 ## Elastic Fabric Adapter - EFA
 
-They are a better Network Interface when compared to ENIs, but are more expensive and only compatible with Linux OS. They are recommended for [HPC](https://paulohsilvapinto.github.io/aws-certify/docs/services/glossary.html) and distributed computation.
+They are a better Network Interface when compared to ENIs, but are more expensive and only compatible with Linux OS. They are recommended for [HPC](/docs/glossary.html) and distributed computation.
 
 They use the Message Passing Interface - MPI standard.
 

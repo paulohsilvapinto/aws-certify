@@ -21,7 +21,7 @@ grand_parent: AWS Services
 
 ## General
 
-The Transfer Family is a fully-managed service that allows [S3](https://paulohsilvapinto.github.io/aws-certify/docs/services/storage/s3.html) and/or [EFS](https://paulohsilvapinto.github.io/aws-certify/docs/services/storage/efs.html) data to be accessed via *FTP*, *FTPS*, *SFTP*, or *AS2* protocols.
+The Transfer Family is a fully-managed service that allows [S3](/docs/services/storage/s3.html) and/or [EFS](/docs/services/storage/efs.html) data to be accessed via *FTP*, *FTPS*, *SFTP*, or *AS2* protocols.
 
 ![Transfer Family](https://d1.awsstatic.com/cloud-storage/product-page-diagram_AWS-Transfer-Family_HIW-Diagram.4af0b3b19477f22bc7e37995c43cf833b6db0ce9.png)
 
