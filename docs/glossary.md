@@ -24,6 +24,9 @@ AWS
 AZ
 : *AWS Availability Zone*.
 
+CLI
+: *Command Line Interface*.
+
 DDoS
 : *Distributed Denial-of-Service*. An attack that focuses on overwhelming the target so that it cannot handle any new request.
 
