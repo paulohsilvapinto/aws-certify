@@ -3,6 +3,7 @@ layout: default
 title: AWS Batch
 parent: Compute
 grand_parent: AWS Services
+last_modified_date: 2023-11-28
 ---
 
 # AWS Batch
@@ -35,7 +36,7 @@ Use cases include:
 
 AWS batch is formed by four components:
 
-- **Compute Environments**: Defines the computing resources that will be available for a specific job queue. You can select the orchestration type (Fargate, [EC2](ec2.html), or EKS), min and max vCPU, managed or unmanaged, instance type, and so on.
+- **Compute Environments**: Defines the computing resources that will be available for a specific job queue. You can select the orchestration type (Fargate, [EC2](./ec2.html), or EKS), min and max vCPU, managed or unmanaged, instance type, and so on.
 - **Job Queues**: Queues for receiving the jobs. Each queue can be attached to up to three computing environments, and it is possible to set the queue priority as well, where queues with higher priority will be processed first. By default, the queues are processed in a FIFO manner, but it can be changed with a scheduling policy.
 - **Job Definitions**: Defines what is needed for a job to be executed: docker image location, commands to be executed, what to do in case of failure, how much vCPU is needed, environment variables, etc.
 - **Job**: Creates a job using the job definition and sends it to the job queue specified by you. Some parameters from the job definition can be overridden.

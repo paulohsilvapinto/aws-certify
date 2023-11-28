@@ -3,6 +3,7 @@ layout: default
 title: AWS DataSync
 parent: Migration
 grand_parent: AWS Services
+last_modified_date: 2023-11-28
 ---
 
 # AWS DataSync
@@ -27,7 +28,7 @@ AWS DataSync is a secure, online service that automates and accelerates moving d
 
 DataSync can copy files and objects between Network File System (NFS), Server Message Block (SMB), Hadoop Distributed File Systems (HDFS), self-managed object storage, AWS Snowcone, S3 (**any storage tier**), EFS, and FSx. 
 
-DataSync **cannot** migrate data from databases. For this, use [AWS DMS](dms.html) instead.
+DataSync **cannot** migrate data from databases. For this, use [AWS DMS](./dms.html) instead.
 
 It does not provide continuous replication, providing scheduled replication by hour, day, or week instead.
 For *AWS* to *AWS* transfers, no agent is required. Otherwise, a *DataSync Agent* is required.

@@ -3,6 +3,7 @@ layout: default
 title: AWS Snow Family
 parent: Migration
 grand_parent: AWS Services
+last_modified_date: 2023-11-28
 ---
 
 # AWS Snow Family
@@ -27,7 +28,7 @@ It is reliable, secure, and tamper-free. Data is encrypted with KMS, and it can 
 
 There are three main options in the Snow Family:
 
-- **Snowcone**: more compact and lightweight of the options. Available with SSD or HDD. Does not come with a battery. It is useful when a *Snowball* device is too much or too big. It is also ready to be used with [AWS DataSync](datasync.html).
+- **Snowcone**: more compact and lightweight of the options. Available with SSD or HDD. Does not come with a battery. It is useful when a *Snowball* device is too much or too big. It is also ready to be used with [AWS DataSync](./datasync.html).
 - **Snowball**: used to migrate TB or PBs of data. Available with SSD or HDD, as Storage Optimized or Compute Optimized, with or without GPU.
 - **Snowmobile**: It's a truck that supports up to 100PB of data. If the migration size is more than 10PB, *Snowmobile* is the go-to option.
 
