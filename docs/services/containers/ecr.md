@@ -34,4 +34,5 @@ Some features are:
 
 - Lifecycle policies help with managing the images;
 - Image scanning helps in identifying vulnerabilities. Each repository can be configured to **scan on push**;
-- Cross-Region and cross-account replication.
+- Cross-Region and cross-account replication;
+- Image versioning, image tagging, etc.
