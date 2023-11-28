@@ -7,7 +7,3 @@ has_children: true
 
 # AWS Services
 {: .no_toc }
-
----
-
-This section will explain all the AWS Services required for all the AWS Certifications.
