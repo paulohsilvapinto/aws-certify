@@ -2,7 +2,7 @@
 layout: default
 title: Docker
 parent: Miscellaneous
-last_modified_date: 2023-11-28
+last_modified_date: 2023-11-29
 ---
 
 # Docker
@@ -41,11 +41,9 @@ Some drawbacks are:
 
 ## Docker image
 
-Each container is based on a docker image, which is similar to an *OS Installation Disk*, but allows infinite customization.
+Each container is based on a docker image, which is similar to an *OS Installation Disk*, but allows infinite customization. Images are typically built from a Dockerfile, which is a plaintext file that specifies all of the components that are included in the container.
 
 Images can be stored on public Docker repositories, such as [Docker Hub](https://hub.docker.com), or private repositories, such as the *Amazon Elastic Container Registry (ECR)*. Amazon ECR also has a public repository, [Amazon ECR Public Gallery](https://gallery.ecr.aws).
-
-It is possible to generate new images by creating a file called *Dockerfile* and building it.
 
 ## Virtual Machines vs Containers
 

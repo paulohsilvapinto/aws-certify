@@ -3,6 +3,7 @@ layout: default
 title: EFS - Elastic File System
 parent: Storage
 grand_parent: AWS Services
+last_modified_date: 2023-11-29
 ---
 
 # EFS - Elastic File System

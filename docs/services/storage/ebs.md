@@ -3,6 +3,7 @@ layout: default
 title: EBS - Elastic Block Store
 parent: Storage
 grand_parent: AWS Services
+last_modified_date: 2023-11-29
 ---
 
 # EBS - Elastic Block Store

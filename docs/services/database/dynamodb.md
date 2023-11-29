@@ -4,6 +4,7 @@ title: DynamoDB
 parent: Databases
 grand_parent: AWS Services
 math: katex
+last_modified_date: 2023-11-29
 ---
 
 # DynamoDB

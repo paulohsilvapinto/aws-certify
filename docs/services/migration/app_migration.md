@@ -3,6 +3,7 @@ layout: default
 title: Application Migration
 parent: Migration
 grand_parent: AWS Services
+last_modified_date: 2023-11-29
 ---
 
 # AWS Application Migration Service (MGN)

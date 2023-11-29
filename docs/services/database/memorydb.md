@@ -3,6 +3,7 @@ layout: default
 title: MemoryDB for Redis
 parent: Databases
 grand_parent: AWS Services
+last_modified_date: 2023-11-29
 ---
 
 # Amazon MemoryDB for Redis

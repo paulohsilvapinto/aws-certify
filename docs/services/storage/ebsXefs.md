@@ -3,6 +3,7 @@ layout: default
 title: EBS x EFS Comparison
 parent: Storage
 grand_parent: AWS Services
+last_modified_date: 2023-11-29
 ---
 
 # EBS x EFS Comparison
