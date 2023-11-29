@@ -39,7 +39,7 @@ EKS is an alternative to ECS with different APIs and flexibility. Some key diffe
 
 ## Launch types
 
-EKS, just like [ECS](./ecs.html), can be deployed with [EC2 instances](/docs/services/compute/ec2.html) or Fargate serverless mode. However, there are two options for EC2 instances:
+EKS, just like [ECS](./ecs.html), can be deployed with [EC2 instances](/docs/services/compute/ec2.html) or [Fargate](./fargate.html) serverless mode. However, there are two options for EC2 instances:
 
 ### Managed Node Groups
 
