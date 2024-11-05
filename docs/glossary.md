@@ -2,7 +2,7 @@
 layout: default
 title: Glossary
 nav_order: 4
-last_modified_date: 2023-11-29
+last_modified_date: 2024-11-05
 ---
 
 # Glossary
@@ -11,7 +11,7 @@ last_modified_date: 2023-11-29
 ---
 
 ACID
-: *Atomic, Consistent, Isolated, and Durable*. They are generally used to define the properties of a relationl database. 
+: *Atomic, Consistent, Isolated, and Durable*. They are generally used to define the properties of a relationl database.
 
 AMI
 : *Amazon Machine Image*. It is a base image for an EC2 instance.
@@ -33,6 +33,9 @@ DDoS
 
 DNS
 : *Domain Name System*: turns domain names into IP addresses.
+
+ENI
+: *Elastic Network Interface*: a VPC component representing a virtual network card.
 
 FIFO
 : *First in, First out*. It is a method for managing items in a queue.
@@ -78,3 +81,6 @@ TTL
 
 UDF
 : *User defined function*.
+
+VPC
+: *Virtual Private Cloud*: logically isolated newtworks.

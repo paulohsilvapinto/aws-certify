@@ -3,7 +3,7 @@ layout: default
 title: AWS Fargate
 parent: Containers
 grand_parent: AWS Services
-last_modified_date: 2023-11-29
+last_modified_date: 2024-11-05
 ---
 
 # AWS Fargate
@@ -23,3 +23,7 @@ last_modified_date: 2023-11-29
 ## General
 
 AWS Fargate is a serverless, pay-as-you-go compute engine compatible with [Amazon Elastic Container Service](./ecs.html) and [Amazon Elastic Kubernetes Service](./eks.html).
+
+The containers are created by Fargate based on a *task definition*.
+
+Easy to scale: only need to increase/decrease the desired number of tasks.

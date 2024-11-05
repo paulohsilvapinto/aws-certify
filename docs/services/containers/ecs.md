@@ -3,7 +3,7 @@ layout: default
 title: Elastic Container Service
 parent: Containers
 grand_parent: AWS Services
-last_modified_date: 2023-11-29
+last_modified_date: 2024-11-05
 ---
 
 # Elastic Container Service
@@ -56,19 +56,33 @@ Fargate is a serverless, pay-as-you-go compute engine. Being serverless, you don
 
 ## IAM Roles
 
-## Instance Profile
+### Instance Profile
 
 The Instance profile is a set of permissions used by the ECS Agent and is only available for EC2 Launch mode. The instance profile will allow or deny the ECS agent to communicate with ECS and ECR and publish logs into Cloudwatch.
 
-## ECS Task Role
+### ECS Task Role
 
-They are defined in the *task definition* (JSON file), and they grant or deny access for the specific tasks to other AWS services, such as S3, DynamoDb, Lambda, etc.
+They can be set via the parameter `taskRoleARN` in the *task definition* (JSON file). They grant or deny access for the specific tasks to other AWS services, such as S3, DynamoDb, Lambda, etc.
+
+## ECS Setup
+
+There are two ways of setting up ECS in an EC2 instance:
+
+- via installing an ECS Agent with a Config File in the EC2 instance;
+- via an AMI Linux ECS-ready image.
+
+In both scenarios, a config file will be created under `/etc/ecs/ecs.config`. Some important parameters are:
+
+- **ECS_CLUSTER**: identifies to which ECS Cluster this EC2 instance belongs to;
+- **ECS_ENGINE_AUTH_DATA**: used for pulling images from a private Docker Image Registry;
+- **ECS_AVAILABLE_LOGGING_DRIVERS**: for logging data into Cloudwatch;
+- **ECS_ENABLE_TASK_IAM_ROLE**: to enable IAM roles for ECS tasks.
 
 ## Load Balancing
 
 *ECS* supports any type of load balancing:
 
-- **Application Load Balancer**: recommended for pretty much any use case.
+- **Application Load Balancer**: recommended for pretty much any use case: more resilience (even with a single EC2 thanks to ALB "port mapping"), optimize CPU/memory usage and allows rolling updates with no uptime impact. ALB's feature "port mapping" allows multiple Task instances to run on the same EC2 instance: as the containers are in the same machine, each container will have a unique port number and, in turn they can all be mapped to a single ALB port, making it transparent to the users.
 - **Network Load Balancer**: recommended only for high throughput/high-performance scenarios or with AWS Private Link.
 - **Classic Load Balancer**: not recommended for any scenario.
 
