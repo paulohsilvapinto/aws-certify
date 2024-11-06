@@ -114,7 +114,7 @@ Lambda tries to reutilize an instance whenever it becomes idle. However, if new 
 Lambdas can be triggered via direct trigger, synchronously or asynchronously, from:
 
 - **CLI**
-- [S3](docs\services\storage\s3.html)
+- [S3](docs/services/storage/s3.html)
 - [SNS](inprogress)
 - [API Gateway](inprogress)
 
@@ -132,7 +132,7 @@ The event is added to a queue and only the status of this action is returned. Th
 
 Several services can start an asynchronous execution, such as:
 
-- [S3](docs\services\storage\s3.html)
+- [S3](docs/services/storage/s3.html)
 - [SNS](inprogress)
 
 In case of failure in the Lambda, by default it will retry it two more times. It is possible to configure how Lambda will handle the error, for example, by sending the events to a [SQS](inprogress) to [Event Bridge](inprogress) to another **Lambda** or to a [SNS Topic](inprogress), or by modifying the parameters `MaximumEventAgeInSeconds` and `MaximumRetryAttempts`.
