@@ -2,7 +2,7 @@
 layout: default
 title: Glossary
 nav_order: 4
-last_modified_date: 2024-11-05
+last_modified_date: 2024-11-07
 ---
 
 # Glossary
@@ -28,11 +28,17 @@ AZ
 CLI
 : *Command Line Interface*.
 
+DAG
+: *Directed Acyclic Graph*
+
 DDoS
 : *Distributed Denial-of-Service*. An attack that focuses on overwhelming the target so that it cannot handle any new request.
 
 DNS
 : *Domain Name System*: turns domain names into IP addresses.
+
+DQDL
+: AWS Glue's *Data Quality Definition Language*
 
 ENI
 : *Elastic Network Interface*: a VPC component representing a virtual network card.

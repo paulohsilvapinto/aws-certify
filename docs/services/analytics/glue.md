@@ -3,7 +3,7 @@ layout: default
 title: AWS Glue
 parent: Analytics
 grand_parent: AWS Services
-last_modified_date: 2024-11-06
+last_modified_date: 2024-11-07
 ---
 
 # AWS Glue
@@ -33,7 +33,7 @@ Using Glue for processing Streaming data **used** to be an anti-patter, but it i
 
 ### Data Catalog
 
-Data Catalog is a centralized metadata catalogue that allows data to be queried from [Amazon Athena](docs/analytics/athena.html), [Amazon EMR](docs/analytics/emr.html) (with SQL-like queries with *Hive*), [Amazon Redshift Spectrum](docs/analytics/redshift.html) and [Quicksight](docs/analytics/quicksight.html, and it is important in a *Data Lake* to allow unstructured data to be queried.
+Data Catalog is a centralized metadata catalogue that allows data to be queried from [Amazon Athena](docs/analytics/athena.html), [Amazon EMR](docs/analytics/emr.html) (with SQL-like queries with *Hive*), [Amazon Redshift Spectrum](docs/database/redshift.html) and [Quicksight](docs/analytics/quicksight.html), and it is important in a *Data Lake* to allow unstructured data to be queried.
 
 The Data Catalog contains information such as:
 
@@ -55,7 +55,7 @@ Sources can be:
 
 - [S3](docs/storage/s3.html)
 - [RDS](docs/storage/rds.html)
-- [Redshift](docs/analytics/redshift.html)
+- [Redshift](docs/database/redshift.html)
 - [DynamoDB](docs/storage/dynamodb.html)
 - *JDBC*: Java Database Connectivity
 - [Glue Data Catalog](#data-catalog)
@@ -79,6 +79,40 @@ Jobs can be scheduled or triggered by *Glue Triggers*.
 Glue Jobs have an optional feature called Bookmarks. This basically persists the state of the job, preventing the same data getting processed again and allowing you to start the next execution exactly where you ended the last one.
 
 In relational databases, job bookmarks can only keep track of new rows. It cannot keep track of updates.
+
+### Workflows
+
+A Glue-only orchestrating component. If any other integration is required, such as a Lambda Function, for example, then Glue Workflow cannot be used.
+
+The workflows can be triggered by schedule, on demand or by EventBridge events with optional batching available
+
+{: note }
+EventBridge is the only *non-Glue* component that offers integration with AWS Glue workflows.
+
+### Glue Studio
+
+Glue Studio is a visual interface for building complex ETL ***DAGs*** (Directed Acyclic Graph, or Workflows).
+
+Sources can be:
+
+- [S3](docs/storage/s3.html)
+- [RDS](docs/storage/rds.html)
+- [Redshift](docs/database/redshift.html)
+- [Kinesis](docs/storage/dynamodb.html)
+- [Kafka](docs/analytics/kafka.html)
+
+And possible targets are:
+
+- [S3](docs/storage/s3.html) with partitioning support.
+- [Glue Data Catalog](#data-catalog)
+
+The studio also provides a dashboard for job overview, status, etc.
+
+### Data Quality
+
+It is possible to add to a job/workflow a Data Quality step for ensuring the data meet some pre-established parameters. In case of failure, you can fail the job or integrate with other services like Cloudwatch to report the unexpected behaviour.
+
+The rules used for the Data Quality check can be defined manually by using the DQDL (*Data Quality Definition Language*) or automatically, where Glue will try to find the patterns on a sample data and create some expected rules.
 
 ## Costs
 
