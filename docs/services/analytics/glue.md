@@ -99,7 +99,7 @@ Sources can be:
 - [RDS](docs/storage/rds.html)
 - [Redshift](docs/database/redshift.html)
 - [Kinesis](docs/storage/dynamodb.html)
-- [Kafka](docs/analytics/kafka.html)
+- [Kafka](docs/analytics/msk.html)
 
 And possible targets are:
 
@@ -113,6 +113,41 @@ The studio also provides a dashboard for job overview, status, etc.
 It is possible to add to a job/workflow a Data Quality step for ensuring the data meet some pre-established parameters. In case of failure, you can fail the job or integrate with other services like Cloudwatch to report the unexpected behaviour.
 
 The rules used for the Data Quality check can be defined manually by using the DQDL (*Data Quality Definition Language*) or automatically, where Glue will try to find the patterns on a sample data and create some expected rules.
+
+## Glue Streaming
+
+Glue Streaming enables you to process streaming data in ***near real-time*** in a serverless way and with autoscaling using continuous-running jobs from the following data sources:
+
+- [Kinesis](docs/storage/dynamodb.html)
+- [Amazon MSK (Managed Streaming for Apache Kafka)](docs/analytics/msk.html)
+- Self-managed Apache Kafka
+
+{: important }
+DynamoDB Streams is not compatible.
+
+Use cases include:
+
+- Near-real-time data processing
+- Fraud detection
+- Social media analytics
+- Internet of Things (IoT) analytics
+- Clickstream analysis
+- Log monitoring and analysis
+- Recommendation systems
+
+It uses *checkpoints* to control what has already been processed. Job Bookmark is not compatible.
+
+## Accessing data via VPC
+
+If a Job need access to a VPC, for example for accessing a JDBC data store, Glue will create and attach an *Elastic Network Interface - ENI* to the job, and the ENI will have a **private** IP address. **There is no public IP address.**, meaning it cannot access public internet. Security Group configurations are also applied to the *ENI*.
+
+If a Job need access to the public internet, then it is required to create a NAT Gateway in the VPC.
+
+It is possible to use Gateway VPC Endpoint for S3 to ensure data does not go through the public internet.
+
+## Cross-Job Data Access
+
+If two jobs are running in the same VPC, they may have access to the data from each other. To avoid this from happening, a different secutiry configuration must be set for each job.
 
 ## Costs
 
