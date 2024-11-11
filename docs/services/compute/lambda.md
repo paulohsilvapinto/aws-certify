@@ -3,6 +3,7 @@ layout: default
 title: AWS Lambda
 parent: Compute
 grand_parent: AWS Services
+math: katex
 last_modified_date: 2024-11-05
 ---
 
