@@ -3,6 +3,7 @@ layout: default
 title: EC2
 parent: Compute
 grand_parent: AWS Services
+last_modified_date: 2024-11-11
 ---
 
 # Elastic Compute Cloud - EC2
@@ -40,8 +41,8 @@ The following purchasing options are available:
   - **Convertible Reserved Instance**: instances can be modified, but is more expensive than the *Reserved Instance* type.
   - **Scheduled Reserved Instance**: the instance is reserved only during a time period, like from 08:00 to 12:00. It is the cheapest option between the Reserved options.
 - **Savings Plans**: Commit to a one or 3-years term for a particular amount of usage, in USD per hour.
-- **Dedicated Hosts**: Pay for a physical host that is fully dedicated to running your instances, and bring your existing per-socket, per-core, or per-VM software licenses to reduce costs.
-- **Dedicated Instances**: Pay by the hour per instance (not per host), for instances that run on single-tenant hardware.
+- **Dedicated Hosts**: Pay for a physical host that is fully dedicated to running your instances, and bring your existing per-socket, per-core, or per-VM software licenses to reduce costs. Ideal for extremely regulated/compliant companies. Full control over instance location. Three-years commitment.
+- **Dedicated Instances**: Pay by the hour per instance (not per host), for instances that run on single-tenant/dedicated hardware. It is not possible to control where the instances will be allocated or access sockets or cores.
 - **Spot**: Use an unused EC2 instance for a low-cost option (the cheapest option). However, the instance can be lost anytime if the instance price goes beyond the max value set by you, potentially causing a loss of data/processing. AWS gives extra minutes after the price threshold is passed. Ideal for fault-tolerant processes like Machine Learning, Big Data processing, etc. It is recommended to have a checkpoint mechanism for restarting the process when needed.
 - **Spot Fleet**: Use a set of Spot Instances plus, optionally, on-demand instances. To use this option, you must set some launch pools containing Instance Type, OS, AZ, etc. Depending on the number of machines and capacity required, AWS will choose which combination of launch pools to use. There are three strategies for choosing the pools: lowest price, capacity-optimized, or diversified.
 
@@ -88,7 +89,7 @@ Every instance has access to the address **http://169.254.169.254/latest/meta-da
 
 ## Bootstrapping
 
-Bootstrapping means running a *bash* script before the instance is available to be used. Some use cases include installing updates, starting services, downloading files, etc. 
+Bootstrapping means running a *bash* script before the instance is available to be used. Some use cases include installing updates, starting services, downloading files, etc.
 
 This script is executed as *root*, only once after the instance is provisioned but before being available to be used.
 
