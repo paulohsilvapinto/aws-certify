@@ -3,7 +3,7 @@ layout: default
 title: AWS Snow Family
 parent: Migration
 grand_parent: AWS Services
-last_modified_date: 2023-11-28
+last_modified_date: 2024-11-13
 ---
 
 # AWS Snow Family
@@ -32,11 +32,11 @@ There are three main options in the Snow Family:
 - **Snowball**: used to migrate TB or PBs of data. Available with SSD or HDD, as Storage Optimized or Compute Optimized, with or without GPU.
 - **Snowmobile**: It's a truck that supports up to 100PB of data. If the migration size is more than 10PB, *Snowmobile* is the go-to option.
 
-## Sonwball on Edge
+## Snowball on Edge
 
 Snowball on Edge can be used when you have a large backlog of data to transfer or if you frequently collect data that needs to be transferred to AWS and your storage is in an area where high-bandwidth internet connections are not available or cost-prohibitive.
 
-You can also use Snowball Edge to run edge computing workloads, such as performing local analysis of data on a Snowball Edge cluster and writing it to the Amazon S3-compatible endpoint. 
+You can also use Snowball Edge to run edge computing workloads, such as performing local analysis of data on a Snowball Edge cluster and writing it to the Amazon S3-compatible endpoint.
 
 It can spin up EC2 Instances and execute Lambda functions (using *AWS Iot Greengrass*) inside of the device.
 

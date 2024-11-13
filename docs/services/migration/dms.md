@@ -3,7 +3,7 @@ layout: default
 title: Database Migration Service
 parent: Migration
 grand_parent: AWS Services
-last_modified_date: 2023-11-29
+last_modified_date: 2024-11-13
 ---
 
 # AWS Database Migration Service (DMS)
@@ -26,7 +26,9 @@ As its name suggests, it is a Database Migration Service. It can be from anywher
 
 Provides continuous replication via CDC tables (*Change Data Capture*), without affecting the source Database, which remains available. Requires an *EC2 instance* for the replication processes.
 
-Supports homogeneous (from/to the same DB Engine) migrations. It also supports heterogeneous (from/to different DB Engines), but it requires an additional tool called *Schema Conversion Tool (SCT)* for translating the schema. For best practices, the SCT should be installed in the source database.
+Supports **homogeneous** (from/to the same DB Engine) migrations. It also supports **heterogeneous** (from/to different DB Engines), but it requires an additional tool called ***Schema Conversion Tool (SCT)*** for translating the schema. For best practices, the SCT should be installed in the source database.
+
+An alternative to using *SCT* is using ***Basic Schema Copy**, but in this case secondary indexes, foreign keys or stored procedures will not be migrated.
 
 It has multi-AZ support, with one primary instance and another standby instance that are kept synchronized synchronously. Good for redundancy and minimized latency.
 

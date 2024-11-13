@@ -3,7 +3,7 @@ layout: default
 title: Amazon Athena
 parent: Analytics
 grand_parent: AWS Services
-last_modified_date: 2024-11-07
+last_modified_date: 2024-11-13
 ---
 
 # Amazon Athena
@@ -75,6 +75,8 @@ It is possible to allow or disallow some operations DDL/DB Management instructio
 
 It is a pay-as-you-go service, charged based on bytes of Data. This means failed queries or DDL instructions are free, but successful or cancelled queries are not.
 
+[S3](docs/storage/s3.html) data transfer charges apply if the S3 Bucket is in a different region than the Athena Query. The data transferred data may be bigger than the query result.
+
 The best way of saving on cost and increasing performance is compressing the data (with GZIP, for example), using columnar and splittable file formats, such as ORC and Parquet, partitioning the data and using a smaller number of large files instead of a large number of small files.
 
 ## Anti-patterns
@@ -83,6 +85,12 @@ Athena is not recommended for:
 
 - Highly formatted reports;
 - ETL.
+
+## Athena Federated Query
+
+Athena federated query uses a custom connector, which is basically a Lambda Function, to connect to **any** data source. It can also be used for creating pipelines and storing data in S3.
+
+Write operations are not supported with *Federated Queries*.
 
 ## Amazon Athena for Apache Spark
 

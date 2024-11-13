@@ -4,7 +4,7 @@ title: DynamoDB
 parent: Databases
 grand_parent: AWS Services
 math: katex
-last_modified_date: 2023-11-29
+last_modified_date: 2024-11-13
 ---
 
 # DynamoDB
@@ -31,13 +31,13 @@ last_modified_date: 2023-11-29
 ## Use cases
 
 - DynamoDB is recommended for a variety of scenarios such as Mobile apps, IoT, Gaming, etc,
-- **Anti-patterns** include: using for data that requires complex transactional data and SQL instructions; modifying from a relational database to a NoSQL database if the application was prepared to work with a relational DB. 
+- **Anti-patterns** include: using for data that requires complex transactional data and SQL instructions; modifying from a relational database to a NoSQL database if the application was prepared to work with a relational DB.
 - **Large objects** cannot be stored directly on DynamoDb due to the limitation of file size, but a typical pattern is storing the data in S3 and the metadata in the DynamoDB table.
 - Another useful pattern is to enable an S3 Notification event to a Lambda Function and store the S3 object's metadata in a DynamoDB table to create a Data Catalogue and index S3's metadata.
 
 {: .note }
 > In general:
->  
+>
 > - Large volume of data with multiple reads and write requests: DynamoDB;
 > - Large volume of data, but data is not retrieved/modified frequently: S3;
 > - Transactional data with complex SQL instructions: RDS.
@@ -66,7 +66,7 @@ Per table, can be:
 
 ## Read Consistency Modes
 
-DynamoDB data is replicated across multi-AZs. The data you are trying to read, maybe is being fetched from a different node than the one the data was originally written. The data could be out-of-date in the replicated node depending on the time interval between the write and the read operations. 
+DynamoDB data is replicated across multi-AZs. The data you are trying to read, maybe is being fetched from a different node than the one the data was originally written. The data could be out-of-date in the replicated node depending on the time interval between the write and the read operations.
 
 Considering this scenario, there are two options for Read Consistency mode, which you can set for each GET API request:
 
@@ -91,7 +91,7 @@ WCU represents one item per second for an item of up to 1 KB in size (rounded up
 > $$
 > WCU = ItemsPerSecond * \frac{ItemSizeKb}{1Kb}
 > $$
-> 
+>
 > \* Item size in KB must be rounded up.
 
 ### RCU (Read Capacity Units)
@@ -100,10 +100,21 @@ RCU represents one Strongly Consistent Read or two Eventually Consistent Reads p
 
 {: .note }
 > $$RCU_{strongly\_consistent} = ItemsPerSecond * \frac{ItemSizeKb}{4Kb}$$
-> 
+>
 > $$RCU_{eventually\_consistent} = \frac{ItemsPerSecond}{2} * \frac{ItemSizeKb}{4Kb}$$
-> 
+>
 > \* Item size in KB must be rounded up to the next multiple of 4. For example, if item size is 10KB we must consider it to be 12KB.
+
+## Partitions
+
+Each *Table Partition* can handle up to 1.000 WCU and 3.000 RCU. Additionally, each partition can store up to 10GB of data.
+
+Therefore:
+
+{: .note }
+> $$
+> NumberOfPartitions = max(RoundUp[\frac{WCU}{1.000} + \frac{RCU}{3.000}], RoundUp[\frac{DataInGB}{10}])
+> $$
 
 ## Indexes
 
@@ -120,6 +131,7 @@ They can be used when there is a need to retrieve the data by different keys. **
 
 - GSIs provide an alternative Primary Key (be it HASH only or HASH + RANGE), and they can be created anytime. It is essentially a new table with shared data between them.
 - RCUs and WCUs must be provisioned for the index. It does not use the same as the base table.
+- GSIs **only** support eventually consistent reads.
 
 {: .important }
 > If writes are throttled in the GSI, then the main table will also be throttled, no matter the WCU consumption in the base table, as the data has to be written to both tables mandatorily.

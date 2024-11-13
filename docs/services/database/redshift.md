@@ -3,7 +3,7 @@ layout: default
 title: Redshift
 parent: Databases
 grand_parent: AWS Services
-last_modified_date: 2023-11-29
+last_modified_date: 2024-11-13
 ---
 
 # Amazon Redshift
@@ -22,7 +22,7 @@ last_modified_date: 2023-11-29
 
 ## General
 
-A fully-managed, Peta-byte scale, columnar Data Warehouse based on PostgreSQL. 
+A fully-managed, Peta-byte scale, columnar Data Warehouse based on PostgreSQL.
 
 - Due to its *Massive Parallel Processing (MPP)* capabilities, it is faster than most competitors. Data and SQL queries are distributed automatically across the compute nodes.
 - It is a columnar database, meaning the data is stored by columns instead of rows. This increases the performance for Analytics (usually, we are interested only in a subset of all the information available), and consequently, there is no need for Indexes and Materialized views.
@@ -90,7 +90,7 @@ There are two ways for adding/removing nodes to/from a cluster:
 
 Elastic Resize is a quick method for resizing the cluster and can be used in two distinct scenarios:
 
-- For adding or removing nodes with the same node type as the other nodes in the cluster. Some queries may be lost during the operation. 
+- For adding or removing nodes with the same node type as the other nodes in the cluster. Some queries may be lost during the operation.
 - **OR** for changing all the node types without changing the number of nodes. When the node type is changed, a new cluster is created, and the data is redistributed to the new cluster. Running queries are dropped when the new cluster is ready. In this scenario the cluster will be in read-only mode.
 
 ### Classic Resize
@@ -108,11 +108,11 @@ Redshift will automatically store three copies of the data for multi-node cluste
 - Original Data
 - Copy on other compute nodes inside the cluster, to be used in case of node failure.
 - Copy on S3 for backup purposes.
-   
-It is possible to create automatic snapshots on S3 in another region asynchronously for disaster recovery. By default, they are stored for one day, but it can be increased to up to 35 days. 
+
+It is possible to create automatic snapshots on S3 in another region asynchronously for disaster recovery. By default, they are stored for one day, but it can be increased to up to 35 days.
 
 {: .important }
-When a Redshift Cluster is terminated, all automatic generated snapshots are deleted from S3, so remember to generate a manual snapshot before termination. 
+When a Redshift Cluster is terminated, all automatic generated snapshots are deleted from S3, so remember to generate a manual snapshot before termination.
 
 To recover from a snapshot, AWS will create a new cluster in parallel with the snapshot and then make the failover to the new cluster.
 
@@ -166,7 +166,7 @@ A general step-by-set is to:
 
 ## Sort Keys
 
-Sort Keys define how the data will sorted inside of a data block on a node slice. Each data block has up to 1MB. 
+Sort Keys define how the data will sorted inside of a data block on a node slice. Each data block has up to 1MB.
 
 It works similarly to indexes in the sense that it stores the min and max values of the Sort Key as metadata on the node slice, and then when data is required for Query/Join, Redshift can simply skip whole blocks of data depending on the SQL conditions. If there is no Sort Key, the query optimizer will most likely request a full table scan.
 
@@ -178,16 +178,16 @@ There are three types of Sort Key:
 
 ### Single Key
 
-- A single column is the Sort Key. 
+- A single column is the Sort Key.
 
 ### Compound Sort Key
 
-- Recommended for most tables and the default method. 
-- It is formed by all the columns listed in the Sort Key Columns, and the order in which they are selected is important. If only secondary columns from the Sort Key are used, the query will not fully benefit from the Sort Key. 
+- Recommended for most tables and the default method.
+- It is formed by all the columns listed in the Sort Key Columns, and the order in which they are selected is important. If only secondary columns from the Sort Key are used, the query will not fully benefit from the Sort Key.
 
 ### Interleaved Sort Key
 
-- All the Sort Key columns have the same weight, so it doesn't matter if only "secondary" Sort Keys are used. It is more effective on huge tables as it can then skip whole blocks of 1 MB of data. 
+- All the Sort Key columns have the same weight, so it doesn't matter if only "secondary" Sort Keys are used. It is more effective on huge tables as it can then skip whole blocks of 1 MB of data.
 - Should not be used on columns with high cardinality (large number of unique values) such as Primary Key, Date columns, etc. On the other hand, columns with a common prefix, such as URLs (https://www.) are better on Interleaved Keys, as Compound Keys only use a small subset of the actual value.
 - The downside is that it considerably increases the load and VACUUM time.
 
@@ -202,7 +202,7 @@ There are three types of Sort Key:
 
 ### COPY
 
-The *COPY* command is the recommended way for loading **external** data into a Redshift table, as it loads the data in a distributed fashion while also identifying the best compression algorithm per column. 
+The *COPY* command is the recommended way for loading **external** data into a Redshift table, as it loads the data in a distributed fashion while also identifying the best compression algorithm per column.
 
 The data source can be: S3, EMR, DynamoDB, and Remote Hosts (SSH). It requires a manifest file and IAM role permissions. Not possible to copy from RDS.
 
@@ -292,6 +292,12 @@ It is always preferable to use *COPY*. When it is not possible, however, *BULK I
 
 It is possible to create materialized views in Redshift, and they can be chained - having a materialized view from another materialized view. When the underlying data changes, they must be refreshed manually or automatically if set during the materialized view creation. They are useful for improving performance of complex joins as they are already computed in the MV.
 
+There are mainly two ways of automatically refreshing a materialized view:
+
+- Using `AUTO REFERESH YES` in the `CREATE` statement: the view will refresh as soon as possible.
+- Using the query editor v2 to create a scheduler to refresh the view only on scheduled hours.
+
+
 ```sql
 CREATE MATERIALIZED VIEW mv_foo
 AUTO REFRESH YES --optional
@@ -329,7 +335,7 @@ Read queries cannot utilize tables with interleaved sort keys or temporary ones.
 
 ## Redshift Workload Management (WLM)
 
-Query prioritization mechanism. Create queues for managing your queries, and avoid having fast queries waiting for slow queries to complete. 
+Query prioritization mechanism. Create queues for managing your queries, and avoid having fast queries waiting for slow queries to complete.
 
 It can also manage which queries are sent to the concurrency scaling cluster.
 
@@ -403,9 +409,9 @@ It is possible to use a Lambda function (same account or cross-account but same 
 
 For registering a Lambda UDF:
 ```sql
-CREATE EXTERNAL FUNCTION function_name(param1_type, paramN_type) 
+CREATE EXTERNAL FUNCTION function_name(param1_type, paramN_type)
 RETURNS return_type VOLATILE LAMBDA 'lambda_name'
-IAM_ROLE 'arn:aws:iam:...'; 
+IAM_ROLE 'arn:aws:iam:...';
 ```
 
 ### Stored Procedures

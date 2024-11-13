@@ -3,7 +3,7 @@ layout: default
 title: EC2
 parent: Compute
 grand_parent: AWS Services
-last_modified_date: 2024-11-11
+last_modified_date: 2024-11-13
 ---
 
 # Elastic Compute Cloud - EC2
@@ -110,6 +110,23 @@ Some limitations are:
 - The root volume must be encrypted.
 - Not available for Spot instances.
 - An instance can hibernate for a maximum of 60 days.
+
+## Instance Recovery
+
+An instance can be recovered in case ***simplified automatic recovery*** or ***Amazon CloudWatch action based recovery*** is enabled and there is loss of power or network connectivity or in case there is a failure in the hardware or software of the Physical Host (not inside the instance!).
+
+A recovered instance is identical to the original instance, including its:
+
+- Instance ID
+- Public, private, and Elastic IP addresses
+- Instance metadata
+- Placement group
+- Attached EBS volumes
+- Availability Zone
+
+Data in ephemeral storage is lost and the operating system’s uptime will start over from zero.
+
+Some alternatives to instance recovery are: using **Auto Scaling Groups** or using [Amazon EBS Multi-Attach](docs/storage/ebs.html)
 
 ## Elastic Network Interface - ENI
 

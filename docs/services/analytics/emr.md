@@ -3,7 +3,7 @@ layout: default
 title: Amazon EMR
 parent: Analytics
 grand_parent: AWS Services
-last_modified_date: 2024-11-11
+last_modified_date: 2024-11-13
 ---
 
 # Amazon EMR
@@ -44,6 +44,13 @@ There are three types of nodes:
 
 Frameworks and applications are chosen at cluster launch, so that EMR can install all required dependencies automatically.
 
+You can automate the instance creation with custom libraries by creating a *bootstrap* script or by creating a custom *AMI*.
+
+The cluster can be launched using ***instance fleets*** or ***uniform instance groups*** configuration.
+
+- ***Instance fleets***: allow you to select a variety of EC2 types and set a target On-Demand capacity and target Spot capacity. AWS will then try to provision those instances with a mix of EC2. It cannot be auto-scaled.
+- ***Uniform instance groups***: In each group, every EC2 instance will have the same capacity. There must be one primary instance group that contains one Amazon EC2 instance, a core instance group that contains one or more EC2 instances, and up to 48 optional task instance groups. Each group can be scaled manually or automatically. The metric **YARNMemoryAvailablePercentage** is handy for autoscaling.
+
 Jobs can be defined and initiated via *CLI*, by connecting directly to the *Master Node*, or via *AWS Console*.
 
 There are two ways of running a Cluster:
@@ -68,7 +75,7 @@ On the other hand, availability is its downside, as it is pretty much an *epheme
 
 ### EMRFS
 
-Similar to HDFS, but instead of storing in the instance itself, the data is stored in [S3](docs/storage/s3.html). In this case, the cluster may still benefit from the internal HDFS for intermediate processing.
+Data is stored in [S3](docs/storage/s3.html). The cluster may still benefit from the internal *HDFS* for intermediate processing, as EMRFS **is not** a substitute of the *HDFS*: *HDFS* is a file system while *EMRFS* is a object store.
 
 In the past it was required to enable the option ***EMR Consistent View*** for ensuring the data would be consistent for every Node. This was guaranteed by a DynamoDB table storing metadata of the [S3](docs/storage/s3.html) objects. However, it is no longer needed as [S3](docs/storage/s3.html) is now Strongly Consistent.
 
