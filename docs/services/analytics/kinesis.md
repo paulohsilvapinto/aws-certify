@@ -101,7 +101,7 @@ Records are produced by the *Producers*, which can be:
 Each record is formed by:
 
 - ***Partition Key***: a unicode string used for directing the record to a particular *Shard*. If the same key is used multiple times it can cause the *hot partition* issue, when the *shard* is unable to handle all the requests graciously.
-- ***Data Blob***: anything up to 1 MB.
+- ***Data Blob***: anything up to 1 MB. Data type is bytes.
 
 After the record enters the *Stream*, the ***Sequence Number*** is added to the record and it works as a unique identifier of that record in that *shard*.
 
